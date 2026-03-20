@@ -860,7 +860,7 @@ export async function cargarLineasTransporte(tipo, container, ctx = {}) {
 
       if (!linea) return;
 
-      showLineaModal(linea, now);
+      showLineaModal(linea, new Date());
 
       renderLineaExtraControls(container, {
         sentidos: sentidosCache,

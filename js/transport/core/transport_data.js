@@ -137,6 +137,48 @@ function isOperatingTodayByDias(linea, now = new Date()) {
 }
 
 /* ==========================
+   HELPERS RURAL POR TRAMOS
+========================== */
+function isMinuteWithinRange(cur, start, end) {
+  if (start == null || end == null) return false;
+
+  // rango normal
+  if (start <= end) {
+    return cur >= start && cur <= end;
+  }
+
+  // cruza medianoche
+  return cur >= start || cur <= end;
+}
+
+function getRuralTripWindows(linea) {
+  const idaRaw = Array.isArray(linea?.horario_ida) ? linea.horario_ida : [];
+  const retRaw = Array.isArray(linea?.horario_retorno) ? linea.horario_retorno : [];
+
+  const ida = idaRaw.map(parseHHMM);
+  const ret = retRaw.map(parseHHMM);
+
+  const windows = [];
+  const len = Math.min(ida.length, ret.length);
+
+  for (let i = 0; i < len; i++) {
+    const start = ida[i];
+    const end = ret[i];
+    if (start == null || end == null) continue;
+
+    windows.push({
+      start,
+      end,
+      ida: String(idaRaw[i] || "").trim(),
+      retorno: String(retRaw[i] || "").trim(),
+      index: i
+    });
+  }
+
+  return windows;
+}
+
+/* ==========================
    OPERATIVIDAD
 ========================== */
 export function isLineOperatingNow(linea, now = new Date()) {
@@ -148,15 +190,11 @@ export function isLineOperatingNow(linea, now = new Date()) {
   const cur = nowMinutes(now);
 
   if (tipo === "rural") {
-    const ida = Array.isArray(linea.horario_ida) ? linea.horario_ida : [];
-    const ret = Array.isArray(linea.horario_retorno) ? linea.horario_retorno : [];
+    // ✅ NUEVO: rural por tramos ida -> retorno
+    const windows = getRuralTripWindows(linea);
 
-    const all = [...ida, ...ret].map(parseHHMM).filter(v => v != null).sort((a, b) => a - b);
-    if (all.length) {
-      const first = all[0];
-      const last = all[all.length - 1];
-      if (first <= last) return cur >= first && cur <= last;
-      return cur >= first || cur <= last;
+    if (windows.length) {
+      return windows.some(w => isMinuteWithinRange(cur, w.start, w.end));
     }
 
     const ini = parseHHMM(linea?.horario_inicio);

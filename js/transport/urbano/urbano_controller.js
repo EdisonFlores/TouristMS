@@ -222,7 +222,7 @@ export async function cargarLineasTransporte(tipo, container, ctx = {}) {
 
       if (!linea) return;
 
-      showLineaModal(linea, now);
+      showLineaModal(linea, new Date());
 
       const needsSentido = ["l3", "l4", "l5"].includes(normStr(linea.codigo));
       if (!needsSentido) {

@@ -73,7 +73,11 @@ let forceVirtualMoronaNext = false;
 const category = document.getElementById("category");
 const extra = document.getElementById("extra-controls");
 const bannerWrap = document.getElementById("loc-banner-wrap");
-
+// 🔹 Ocultar aviso cuando el usuario interactúa con el select
+if (category) {
+  category.addEventListener("focus", hideDetectedFacadeOnCategoryChange);
+  category.addEventListener("click", hideDetectedFacadeOnCategoryChange);
+}
 /* ================= HEADER INIT ================= */
 applyThemeUI();
 applyLanguageUI();
@@ -383,6 +387,12 @@ function showDetectedFacade() {
     };
   };
 
+  // Estado inicial por defecto: oculto hasta que el banner se procese
+  if (category) {
+    category.disabled = true;
+    category.classList.add("d-none");
+  }
+
   if (!p || !c) {
     banner.className = "alert alert-info py-2 mb-2";
     banner.innerHTML = `
@@ -394,11 +404,6 @@ function showDetectedFacade() {
     `;
 
     wireExploreMorona();
-
-    if (category) {
-      category.disabled = true;
-      category.classList.add("d-none");
-    }
     return;
   }
 
@@ -430,6 +435,13 @@ function showDetectedFacade() {
       </div>
     `;
     wireExploreMorona();
+  }
+
+  // Cuando ya hay ubicación detectada, mostrar y habilitar el select
+  if (category) {
+    category.disabled = false;
+    category.classList.remove("d-none");
+    category.value = "";
   }
 }
 
@@ -863,8 +875,6 @@ category.onchange = async () => {
 
   hideDetectedFacadeOnCategoryChange();
 
-  console.log("📍 Fachada:", detectedAdmin);
-  console.log("🧠 ctxGeo (lógico):", ctxGeo);
 
   const currentMode = () => getMode?.() || "walking";
   const infoBox = () => document.getElementById("route-info");
@@ -1162,7 +1172,7 @@ category.onchange = async () => {
     return;
   }
 
-  if (category.value === "alimentacion") {
+  if (category.value === "Alimentacion") {
     const tipos = await getTiposComidaFromLugar({
       provincia: ctxGeo.provincia,
       canton: ctxGeo.canton,
