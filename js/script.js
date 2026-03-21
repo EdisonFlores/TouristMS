@@ -1,6 +1,7 @@
 // js/script.js
 
 /* ================= IMPORTS ================= */
+import { injectSpeedInsights } from '@vercel/speed-insights';
 import { findNearest, updateUserLocation, setTravelMode, setActivePlaceAction } from "./app/actions.js";
 import { dataList, getUserLocation, getMode } from "./app/state.js";
 import { translatePage } from "./app/translate.js";
@@ -48,6 +49,9 @@ import {
   getCantonesFSByCodigoProvincia,
   getTiposComidaFromLugar
 } from "./app/selects.js";
+
+/* ================= VERCEL SPEED INSIGHTS ================= */
+injectSpeedInsights();
 
 /* ================= ESTADO GLOBAL (UI) ================= */
 let activePlace = null;
