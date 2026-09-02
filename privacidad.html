@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d6efd">
+  <meta name="description" content="Información sobre privacidad, ubicación, servicios externos y datos utilizados por MoronaBus.">
+  <title>Política de privacidad | MoronaBus</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; background: #f2f5f8; color: #182b3c; }
+    body { margin: 0; line-height: 1.7; }
+    header { background: #08263c; color: white; padding: 1.3rem max(1rem, calc((100% - 850px) / 2)); }
+    header a { color: white; font-size: 1.2rem; font-weight: 700; }
+    main { box-sizing: border-box; max-width: 900px; margin: 1.5rem auto; padding: clamp(1rem, 4vw, 2.5rem); background: white; border-radius: 1rem; }
+    h1 { line-height: 1.2; font-size: clamp(1.8rem, 5vw, 2.5rem); }
+    h2 { margin-top: 2rem; line-height: 1.4; font-size: 1.35rem; }
+    a { color: #095bc1; overflow-wrap: anywhere; }
+    a:focus-visible { outline: 3px solid #ed9d19; outline-offset: 4px; }
+    li { margin-bottom: .65rem; }
+    .notice { padding: 1rem; background: #fff3cd; color: #543f00; border-left: 4px solid #d49b12; }
+    .date { color: #586875; }
+    footer { margin-top: 2rem; border-top: 1px solid #ccd4db; padding-top: 1rem; }
+    @media (prefers-color-scheme: dark) {
+      :root { background: #101820; color: #edf3f8; }
+      main { background: #1a2732; }
+      a { color: #92c5ff; }
+      .date { color: #bbc9d5; }
+    }
+  </style>
+</head>
+<body>
+  <header><a href="/">MoronaBus · Volver al mapa</a></header>
+  <main>
+    <h1>Política de privacidad de MoronaBus</h1>
+    <p class="date">Fecha del borrador: 2 de septiembre de 2026</p>
+    <p class="notice"><strong>Borrador pendiente de validación del responsable.</strong> Antes de utilizar esta página para publicar en Google Play deben confirmarse los plazos de conservación y la configuración de los servicios de analítica.</p>
+
+    <h2>1. Responsable y alcance</h2>
+    <p>MoronaBus es una plataforma de consulta de transporte, turismo y servicios de Morona Santiago. El desarrollador identificado en la aplicación es Edison Flores. Esta política describe el tratamiento de datos de la web y su instalación como aplicación web progresiva (PWA). Los sitios externos abiertos desde MoronaBus tienen sus propias políticas.</p>
+    <p>Para consultas de privacidad o solicitudes relacionadas con tus datos, escribe a <a href="mailto:floresedison205@gmail.com">floresedison205@gmail.com</a>. Este correo es el canal de contacto para solicitar información, rectificación o eliminación de datos relacionados con MoronaBus.</p>
+
+    <h2>2. Ubicación y planificación de recorridos</h2>
+    <p>Con tu autorización mediante el navegador o el sistema operativo, MoronaBus accede a las coordenadas de tu dispositivo para mostrar tu posición, encontrar lugares cercanos y calcular recorridos. La precisión depende del dispositivo y del permiso concedido. También se procesan los puntos de origen y destino que selecciones manualmente.</p>
+    <p>Durante un trayecto iniciado se solicitan actualizaciones de ubicación para seguir el recorrido. La versión web utiliza la geolocalización del navegador; no incorpora un servicio nativo independiente de seguimiento con la aplicación cerrada. Puedes detener el trayecto o retirar el permiso de ubicación en los ajustes del sitio o del dispositivo.</p>
+    <p>Las coordenadas necesarias para las funciones solicitadas se transmiten a servicios de rutas, geocodificación y clima. No debe entenderse que permanecen exclusivamente en tu teléfono. Si no autorizas la ubicación, puedes utilizar la opción de explorar Morona sin GPS, aunque las funciones basadas en tu posición real no estarán disponibles.</p>
+
+    <h2>3. Proveedores y datos transmitidos</h2>
+    <ul>
+      <li><strong>OSRM:</strong> recibe coordenadas de origen, destino y puntos del recorrido para calcular rutas. Algunas consultas pasan por el backend de MoronaBus alojado en Vercel y otras se realizan directamente desde el navegador.</li>
+      <li><strong>Nominatim/OpenStreetMap:</strong> recibe coordenadas para identificar el contexto territorial, como provincia, cantón y parroquia.</li>
+      <li><strong>Open-Meteo:</strong> recibe coordenadas de la ubicación consultada para proporcionar información meteorológica.</li>
+      <li><strong>OpenStreetMap y OpenTopoMap:</strong> reciben solicitudes de imágenes del mapa. Estas solicitudes indican el área visualizada y pueden incluir información técnica como la dirección IP y datos del navegador.</li>
+      <li><strong>Vercel:</strong> sirve la aplicación y sus funciones de backend. Las solicitudes incluyen datos técnicos de conexión; las consultas de rutas pueden incluir coordenadas en la URL. Los registros del servicio pueden contener información de las solicitudes.</li>
+      <li><strong>Firebase/Google Cloud y GitHub:</strong> se utilizan para almacenar y distribuir el catálogo de lugares, líneas, paradas y otros datos públicos, incluidos archivos JSON. El flujo de consulta revisado no registra un historial personal de trayectos en Firestore; esto no excluye los registros técnicos de los proveedores.</li>
+      <li><strong>jsDelivr y unpkg:</strong> suministran bibliotecas y estilos. Al descargarlos, reciben las solicitudes de red correspondientes.</li>
+    </ul>
+    <p>Estos proveedores pueden procesar datos fuera de Ecuador conforme a sus condiciones e infraestructura. La política no garantiza una ubicación geográfica concreta de sus servidores.</p>
+
+    <h2>4. Analítica, cookies y almacenamiento local</h2>
+    <p>La aplicación carga Google Analytics y Google Tag Manager para medición y gestión de etiquetas. Pueden utilizar cookies o identificadores y procesar información sobre visitas, dispositivo, navegador e interacciones, según su configuración. La lista final de etiquetas, opciones de consentimiento y conservación debe ser validada por el responsable antes de publicar esta política como definitiva.</p>
+    <p>MoronaBus guarda localmente preferencias como idioma, tema visual y estado del tutorial. El Service Worker puede conservar archivos de la aplicación y datos públicos consultados para reducir descargas. Puedes eliminar estos datos desde la configuración de almacenamiento del sitio en tu navegador. Desinstalar el acceso directo no necesariamente elimina todos los datos del sitio.</p>
+    <p>El asistente de voz utiliza la síntesis de voz del navegador para leer información. Esa función no utiliza un reconocimiento de voz propio ni solicita acceso al micrófono; el procesamiento de las voces depende del navegador y del sistema operativo.</p>
+
+    <h2>5. Formularios y contacto voluntario</h2>
+    <p>Si abres un formulario o contactas al proyecto mediante un servicio externo, se tratarán los datos que decidas enviar, como tus datos de contacto y el contenido del mensaje, para atender la consulta. Revisa los campos y la política del servicio antes de enviarlos. No incluyas contraseñas, documentos de identidad ni información sensible innecesaria.</p>
+
+    <h2>6. Conservación y eliminación</h2>
+    <p>El estado del recorrido se maneja en la sesión de la aplicación. Las preferencias y la caché del navegador pueden permanecer hasta que se borren, se reemplacen o el navegador las elimine. Los datos ya transmitidos a un servicio externo no se eliminan al limpiar la caché del teléfono.</p>
+    <p>Los plazos de registros de alojamiento, analítica y comunicaciones dependen de la configuración de cada servicio. Esos plazos están pendientes de confirmación por el responsable y deben concretarse antes de finalizar esta política. Puedes solicitar información o eliminación de datos que hayas proporcionado al proyecto mediante el contacto indicado, describiendo la solicitud sin aportar datos adicionales innecesarios.</p>
+
+    <h2>7. Tus opciones y derechos</h2>
+    <p>Puedes denegar o revocar la ubicación, detener el seguimiento del trayecto, borrar datos locales y gestionar cookies desde tu navegador. Puedes solicitar acceso, rectificación o eliminación de los datos que te conciernen, así como ejercer otros derechos que correspondan conforme a la normativa aplicable, mediante el contacto de privacidad. La solicitud se evaluará según los datos disponibles y las obligaciones aplicables.</p>
+
+    <h2>8. Seguridad y cambios</h2>
+    <p>La versión pública utiliza HTTPS para las conexiones. Ningún sistema garantiza seguridad absoluta. La información sobre rutas y horarios es referencial y no debe utilizarse como servicio de emergencia.</p>
+    <p>Los cambios en funcionalidades, proveedores o tratamiento de datos deberán reflejarse en esta página, actualizando su fecha. Esta política no sustituye los avisos ni las autorizaciones que deban solicitarse dentro de la aplicación.</p>
+    <footer><a href="/">Volver a MoronaBus</a></footer>
+  </main>
+</body>
+</html>
