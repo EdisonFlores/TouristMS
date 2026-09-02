@@ -1,6 +1,7 @@
 {
   "name": "MoronaBus",
   "short_name": "MoronaBus",
+  "id": "/",
   "description": "Rutas de bus, paradas, terminales, turismo, eventos y servicios en Macas y Morona Santiago.",
   "start_url": "/",
   "scope": "/",
@@ -12,13 +13,13 @@
   "categories": ["travel", "navigation", "maps", "transportation"],
   "icons": [
     {
-      "src": "/assets/icons/icon-192.png",
+      "src": "/assets/icons/icon-app-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/icons/icon-512.png",
+      "src": "/assets/icons/icon-app-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"

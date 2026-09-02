@@ -1,8 +1,10 @@
-const CACHE_NAME = "moronabus-shell-v85";
+const CACHE_NAME = "moronabus-shell-v88";
 
 const STATIC_ASSETS = [
   "/",
   "/index.html",
+  "/offline.html",
+  "/assets/icons/icon-maskable-512.png",
   "/css/styles.css",
   "/js/script.js",
   "/js/map/map.js",
@@ -32,7 +34,7 @@ self.addEventListener("activate", event => {
     caches.keys().then(keys =>
       Promise.all(
         keys
-          .filter(key => key !== CACHE_NAME)
+          .filter(key => key.startsWith("moronabus-shell-") && key !== CACHE_NAME)
           .map(key => caches.delete(key))
       )
     )
@@ -61,7 +63,7 @@ self.addEventListener("fetch", event => {
           caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
           return response;
         })
-        .catch(() => caches.match(request))
+        .catch(async () => (await caches.match(request)) || unavailableJson())
     );
     return;
   }
@@ -73,7 +75,7 @@ self.addEventListener("fetch", event => {
         const copy = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
         return response;
-      }))
+      })).catch(() => unavailableJson())
     );
     return;
   }
@@ -94,7 +96,7 @@ self.addEventListener("fetch", event => {
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request).catch(async () =>
-        (await caches.match("/index.html")) ||
+        (await caches.match("/offline.html")) ||
         new Response("Sin conexión", { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } })
       )
     );
@@ -107,3 +109,10 @@ self.addEventListener("fetch", event => {
     ))
   );
 });
+
+function unavailableJson() {
+  return new Response(JSON.stringify({
+    ok: false,
+    error: "Sin conexión: estos datos todavía no están disponibles en el dispositivo"
+  }), { status: 503, headers: { "Content-Type": "application/json; charset=utf-8" } });
+}

@@ -50,6 +50,7 @@ let routeLine = null;
 let routeLines = [];
 let markerSelected = null;
 let renderedPlaceMarkers = [];
+let routeRenderVersion = 0;
 
 let transportLines = [];
 
@@ -140,6 +141,9 @@ export function clearMarkers() {
  * Limpia clear route para dejar la vista o el estado listo para otro flujo.
  */
 export function clearRoute() {
+  // Invalida consultas OSRM pendientes para impedir que una respuesta antigua
+  // vuelva a dibujar una ruta después de limpiar el mapa.
+  routeRenderVersion += 1;
   if (routeLine) {
     try { routeOverlay.removeLayer(routeLine); } catch {}
     routeLine = null;
@@ -154,6 +158,7 @@ export function clearRoute() {
     try { routeOverlay.removeLayer(markerSelected); } catch {}
     markerSelected = null;
   }
+  try { routeOverlay.clearLayers(); } catch {}
 }
 
 /**
@@ -369,6 +374,7 @@ export async function drawRoute(userLoc, place, mode, infoBox) {
   if (!userLoc || !place?.ubicacion) return;
 
   clearRoute();
+  const renderVersion = routeRenderVersion;
 
   const { latitude, longitude } = place.ubicacion;
   const dest = [latitude, longitude];
@@ -407,6 +413,8 @@ export async function drawRoute(userLoc, place, mode, infoBox) {
       geometries: "geojson",
       timeoutMs: 8000
     });
+
+    if (renderVersion !== routeRenderVersion) return { cancelled: true };
 
     if (!data.routes?.length) {
       throw new Error("OSRM no devolvió rutas");
@@ -452,6 +460,7 @@ export async function drawRoute(userLoc, place, mode, infoBox) {
     };
 
   } catch (err) {
+    if (renderVersion !== routeRenderVersion) return { cancelled: true };
     console.error("OSRM falló en drawRoute, usando fallback:", err);
 
     routeLine = drawFallbackPolyline([userLoc, dest], {
@@ -499,6 +508,9 @@ export async function drawRouteToPoint({
     if (clearFirst) clearRoute();
   }
 
+  const tracksNormalRoute = !layerGroup && layerTarget !== "transport";
+  const renderVersion = tracksNormalRoute ? routeRenderVersion : null;
+
   const profile = {
     walking: "foot",
     driving: "car",
@@ -523,6 +535,10 @@ export async function drawRouteToPoint({
       geometries: "geojson",
       timeoutMs: 8000
     });
+
+    if (tracksNormalRoute && renderVersion !== routeRenderVersion) {
+      return { cancelled: true };
+    }
 
     if (!data.routes?.length) {
       throw new Error("OSRM no devolvió rutas");
@@ -568,6 +584,9 @@ export async function drawRouteToPoint({
     return r;
 
   } catch (err) {
+    if (tracksNormalRoute && renderVersion !== routeRenderVersion) {
+      return { cancelled: true };
+    }
     console.error("OSRM falló en drawRouteToPoint, usando fallback:", err);
 
     const line = drawFallbackPolyline([from, to], {

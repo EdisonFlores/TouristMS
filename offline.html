@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d6efd">
+  <title>Sin conexión | MoronaBus</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; min-height: 100svh; display: grid; place-items: center; background: #071d32; color: #fff; }
+    main { width: min(30rem, 88%); padding: 2rem 0; text-align: center; }
+    img { width: 96px; height: 96px; border-radius: 22px; }
+    p { line-height: 1.6; color: #d3e0ec; }
+    button { padding: .9rem 1.5rem; border: 0; border-radius: .7rem; background: #0d6efd; color: white; font: inherit; cursor: pointer; }
+    button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <img src="/assets/icons/icon-maskable-512.png" alt="" width="96" height="96">
+    <h1>Estás sin conexión</h1>
+    <p>MoronaBus necesita internet para cargar el mapa y consultar rutas, horarios y servicios. Activa tus datos móviles o conéctate a una red Wi-Fi.</p>
+    <p>No se puede garantizar que los datos guardados estén actualizados.</p>
+    <button type="button" onclick="location.reload()">Volver a intentar</button>
+    <p role="status" id="status"></p>
+  </main>
+  <script>
+    window.addEventListener('online', () => {
+      document.getElementById('status').textContent = 'La conexión parece disponible. Pulsa Volver a intentar.';
+    });
+  </script>
+</body>
+</html>

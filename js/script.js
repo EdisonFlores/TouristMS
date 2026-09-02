@@ -614,7 +614,7 @@ function clearDirections() {
   if (loc) map.setView(loc, 14);
 
   refreshLayersOverlays();
-  showDetectedFacade();
+  if (bannerWrap) bannerWrap.innerHTML = "";
 }
 
 /* ================= MODAL GENERAL ================= */
@@ -1216,14 +1216,19 @@ async function afterLocate(loc) {
 if (USE_TEST_LOCATION) {
   afterLocate(TEST_LOCATION);
 } else {
-  navigator.geolocation.getCurrentPosition(
+  requestInitialLocation(
     async pos => afterLocate([pos.coords.latitude, pos.coords.longitude]),
-    () => {
+    error => {
       if (!bannerWrap) return;
+      const locationMessage = error?.code === 1
+        ? "El permiso de ubicación está desactivado. Puedes habilitarlo en los permisos del sitio o explorar Morona sin GPS."
+        : error?.code === 3
+          ? "La ubicación tardó demasiado. Revisa que el GPS esté activo o explora Morona sin GPS."
+          : "No pudimos obtener tu ubicación. Puedes explorar Morona sin GPS.";
       bannerWrap.innerHTML = `
         <div id="loc-banner" class="alert alert-info py-2 mb-2">
-          <b>📍 Sin cobertura por ahora</b><br>
-          <div class="mt-1">De momento no hay datos registrados en la zona, pronto habrá cobertura.</div>
+          <b>📍 Ubicación no disponible</b><br>
+          <div class="mt-1">${locationMessage}</div>
           <div class="mt-2 tm-visit-box">
             <div class="small mb-2">Mientras tanto, puedes explorar Morona:</div>
             <button id="btn-visit-morona" class="btn btn-primary w-100">
@@ -1260,6 +1265,18 @@ if (USE_TEST_LOCATION) {
 /* =====================================================
    HELPERS: TERMINALES / PLACES FAKE / NORMALIZACIÓN
 ===================================================== */
+function requestInitialLocation(onSuccess, onError) {
+  if (!navigator.geolocation) {
+    onError({ code: 2 });
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(onSuccess, onError, {
+    enableHighAccuracy: true,
+    timeout: 15000,
+    maximumAge: 60000
+  });
+}
+
 function normLite(s) {
   return String(s || "").trim().toLowerCase();
 }
@@ -2557,7 +2574,7 @@ function clearFullMapAndPanel() {
   if (category) category.value = "";
   categoryPicker.sync();
 
-  showDetectedFacade();
+  if (bannerWrap) bannerWrap.innerHTML = "";
   refreshLayersOverlays();
 }
 
