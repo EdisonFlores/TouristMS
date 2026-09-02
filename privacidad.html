@@ -17,7 +17,6 @@
     a { color: #095bc1; overflow-wrap: anywhere; }
     a:focus-visible { outline: 3px solid #ed9d19; outline-offset: 4px; }
     li { margin-bottom: .65rem; }
-    .notice { padding: 1rem; background: #fff3cd; color: #543f00; border-left: 4px solid #d49b12; }
     .date { color: #586875; }
     footer { margin-top: 2rem; border-top: 1px solid #ccd4db; padding-top: 1rem; }
     @media (prefers-color-scheme: dark) {
@@ -32,8 +31,7 @@
   <header><a href="/">MoronaBus · Volver al mapa</a></header>
   <main>
     <h1>Política de privacidad de MoronaBus</h1>
-    <p class="date">Fecha del borrador: 2 de septiembre de 2026</p>
-    <p class="notice"><strong>Borrador pendiente de validación del responsable.</strong> Antes de utilizar esta página para publicar en Google Play deben confirmarse los plazos de conservación y la configuración de los servicios de analítica.</p>
+    <p class="date">Última actualización: 2 de septiembre de 2026</p>
 
     <h2>1. Responsable y alcance</h2>
     <p>MoronaBus es una plataforma de consulta de transporte, turismo y servicios de Morona Santiago. El desarrollador identificado en la aplicación es Edison Flores. Esta política describe el tratamiento de datos de la web y su instalación como aplicación web progresiva (PWA). Los sitios externos abiertos desde MoronaBus tienen sus propias políticas.</p>
@@ -57,21 +55,31 @@
     <p>Estos proveedores pueden procesar datos fuera de Ecuador conforme a sus condiciones e infraestructura. La política no garantiza una ubicación geográfica concreta de sus servidores.</p>
 
     <h2>4. Analítica, cookies y almacenamiento local</h2>
-    <p>La aplicación carga Google Analytics y Google Tag Manager para medición y gestión de etiquetas. Pueden utilizar cookies o identificadores y procesar información sobre visitas, dispositivo, navegador e interacciones, según su configuración. La lista final de etiquetas, opciones de consentimiento y conservación debe ser validada por el responsable antes de publicar esta política como definitiva.</p>
+    <p>MoronaBus carga directamente Google Analytics, con identificador G-NF50RFVQCB, para medir el uso de la plataforma. Este servicio puede utilizar cookies o identificadores y procesar información sobre visitas, dispositivo, navegador e interacciones. Consulta la <a href="https://policies.google.com/privacy?hl=es">política de privacidad de Google</a> para conocer sus prácticas.</p>
+    <p>También se carga el contenedor Google Tag Manager GTM-5MP29WHK. En la versión publicada confirmada por el responsable, este contenedor está vacío y no contiene etiquetas adicionales. Esto no desactiva Google Analytics, que se incorpora por separado en la página.</p>
     <p>MoronaBus guarda localmente preferencias como idioma, tema visual y estado del tutorial. El Service Worker puede conservar archivos de la aplicación y datos públicos consultados para reducir descargas. Puedes eliminar estos datos desde la configuración de almacenamiento del sitio en tu navegador. Desinstalar el acceso directo no necesariamente elimina todos los datos del sitio.</p>
     <p>El asistente de voz utiliza la síntesis de voz del navegador para leer información. Esa función no utiliza un reconocimiento de voz propio ni solicita acceso al micrófono; el procesamiento de las voces depende del navegador y del sistema operativo.</p>
 
     <h2>5. Formularios y contacto voluntario</h2>
+    <p>El proyecto recibe respuestas mediante Google Forms y comunicaciones por correo electrónico. Los datos aportados se utilizan para atender y dar seguimiento a las solicitudes enviadas al proyecto.</p>
     <p>Si abres un formulario o contactas al proyecto mediante un servicio externo, se tratarán los datos que decidas enviar, como tus datos de contacto y el contenido del mensaje, para atender la consulta. Revisa los campos y la política del servicio antes de enviarlos. No incluyas contraseñas, documentos de identidad ni información sensible innecesaria.</p>
 
     <h2>6. Conservación y eliminación</h2>
     <p>El estado del recorrido se maneja en la sesión de la aplicación. Las preferencias y la caché del navegador pueden permanecer hasta que se borren, se reemplacen o el navegador las elimine. Los datos ya transmitidos a un servicio externo no se eliminan al limpiar la caché del teléfono.</p>
-    <p>Los plazos de registros de alojamiento, analítica y comunicaciones dependen de la configuración de cada servicio. Esos plazos están pendientes de confirmación por el responsable y deben concretarse antes de finalizar esta política. Puedes solicitar información o eliminación de datos que hayas proporcionado al proyecto mediante el contacto indicado, describiendo la solicitud sin aportar datos adicionales innecesarios.</p>
+    <ul>
+      <li><strong>Google Analytics:</strong> según la configuración confirmada por el responsable, la conservación de datos de eventos es de 2 meses y la de datos de usuario es de 14 meses. Estos ajustes no equivalen a la eliminación de todos los informes: los informes agregados estándar no están sujetos a esos mismos límites. El cómputo de la conservación de identificadores puede depender de la opción de restablecimiento por nueva actividad configurada en Analytics. Consulta la <a href="https://support.google.com/analytics/answer/7667196?hl=es">explicación de Google sobre conservación de datos</a>.</li>
+      <li><strong>Correos y respuestas de Google Forms:</strong> se conservan después de atender la consulta, sin un plazo fijo de eliminación automática establecido. Puedes solicitar su eliminación mediante el procedimiento indicado a continuación.</li>
+      <li><strong>Registros técnicos de proveedores:</strong> se gestionan conforme a las condiciones y configuraciones del servicio correspondiente. Los plazos de Analytics no deben interpretarse como plazos aplicables a Vercel, OSRM u otros proveedores. Puedes contactar al responsable para consultar el tratamiento que corresponda a tu solicitud.</li>
+    </ul>
 
-    <h2>7. Tus opciones y derechos</h2>
+    <h2 id="eliminacion">7. Cómo solicitar la eliminación de datos</h2>
+    <p>Escribe a <a href="mailto:floresedison205@gmail.com?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20datos%20-%20MoronaBus">floresedison205@gmail.com</a> con el asunto «Solicitud de eliminación de datos — MoronaBus». Indica qué información quieres eliminar y, si corresponde, el correo utilizado, el formulario y la fecha aproximada del envío. No envíes contraseñas ni documentos de identidad sin que exista una necesidad justificada.</p>
+    <p>El responsable revisará la solicitud y podrá pedir únicamente la información necesaria para localizar los datos y verificar que te corresponden. Si existe una obligación que impida eliminar algún dato, se te informará del motivo. Esta solicitud se refiere a los datos gestionados por el proyecto; no elimina automáticamente la información que un proveedor trate por su cuenta ni los archivos guardados en tu dispositivo.</p>
+
+    <h2>8. Tus opciones y derechos</h2>
     <p>Puedes denegar o revocar la ubicación, detener el seguimiento del trayecto, borrar datos locales y gestionar cookies desde tu navegador. Puedes solicitar acceso, rectificación o eliminación de los datos que te conciernen, así como ejercer otros derechos que correspondan conforme a la normativa aplicable, mediante el contacto de privacidad. La solicitud se evaluará según los datos disponibles y las obligaciones aplicables.</p>
 
-    <h2>8. Seguridad y cambios</h2>
+    <h2>9. Seguridad y cambios</h2>
     <p>La versión pública utiliza HTTPS para las conexiones. Ningún sistema garantiza seguridad absoluta. La información sobre rutas y horarios es referencial y no debe utilizarse como servicio de emergencia.</p>
     <p>Los cambios en funcionalidades, proveedores o tratamiento de datos deberán reflejarse en esta página, actualizando su fecha. Esta política no sustituye los avisos ni las autorizaciones que deban solicitarse dentro de la aplicación.</p>
     <footer><a href="/">Volver a MoronaBus</a></footer>
